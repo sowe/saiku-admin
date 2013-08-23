@@ -1,0 +1,70 @@
+<div>
+  <h1>Users</h1>
+
+  <a href="#newUser" data-toggle="modal">New user</a>
+
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th>User</th>
+      <th>Roles</th>
+      <th>Date</th>
+      <th>Active</th>
+    </tr>
+
+    <% _.each(data, function(user) { %>
+      <tr>
+        <td><%=user.user%></td>
+        <td><%=user.roles%></td>
+        <td><%=new Date(user.createDate).format('YYYY-MM-DD')%></td>
+        <td></td>
+      </tr>
+    <% }); %>
+  </table>
+
+  <h1>Roles</h1>
+
+  <div class="content_roles">
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="newUser" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <form action="/saiku_admin/api/users" method="post" id="form_user">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">New User</h3>
+    </div>
+    <div class="modal-body">
+
+      <div class="row">
+        <div class="span4 controls">
+          <label for="inputuser">User</label>
+          <input id="inputuser" type="text" placeholder="User" name="user" data-rule-required="true">
+          <label for="inputusername">Username</label>
+          <input id="inputusername" type="text" placeholder="Username" name="username" data-rule-required="true">
+          <label for="inputpassword">Password</label>
+          <input id="inputpassword" type="password" placeholder="Nombre" name="password" data-rule-required="true">
+          <label for="inputroles">Roles</label>
+          <select id="inputpassword" multiple="multiple" name="roles" data-rule-required="true">
+            <% _.each(roles, function(role) { %>
+              <option value="<%=role.attributes['name']%>"><%=role.attributes['name']%></option>
+            <% }); %>
+          </select>
+        </div>
+        <div class="span3 controls">
+          <label for="inputname">Name</label>
+          <input id="inputname" type="text" placeholder="Name" name="name">
+          <label for="inputsurname">Surname</label>
+          <input id="inputsurname" type="text" placeholder="Surname" name="surname">
+          <label for="inputemail">Email</label>
+          <input id="inputemail" type="text" placeholder="Email" name="email" data-rule-required="true">
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,30 @@
+<table>
+  <tr>
+    <th>id</th>
+    <th>select_type</th>
+    <th>table</th>
+    <th>type</th>
+    <th>possible_keys</th>
+    <th>key</th>
+    <th>key_len</th>
+    <th>ref</th>
+    <th>rows</th>
+    <th>Extra</th>
+  </tr>
+
+
+<% _.each(data, function(explainQuery) { %>
+  <tr>
+    <td><%=explainQuery._id%></td>
+    <td><%=explainQuery.selectType%></td>
+    <td><%=explainQuery.table%></td>
+    <td><%=explainQuery.possibleKeys%></td>
+    <td><%=explainQuery.key%></td>
+    <td><%=explainQuery.keyLen%></td>
+    <td><%=explainQuery.ref%></td>
+    <td><%=explainQuery.rows%></td>
+    <td><%=explainQuery.extra%></td>
+  </tr>
+<% }); %>
+
+</table>
