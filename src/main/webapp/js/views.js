@@ -1,5 +1,5 @@
 define(
-  ["backbone", "rbbone", "BModal", "BAlert", "validate", "R", "models", 
+  ["backbone", "rbbone", "BModal", "BAlert", "validate", "R", "models", "highcharts",
   "text!templates/home.html",
   "text!templates/partials/_home_users.html",
   "text!templates/partials/_home_roles.html",
@@ -8,14 +8,16 @@ define(
   "text!templates/users_roles.html",
   "text!templates/cubes.html",
   "text!templates/perform.html"],
-  function(Backbone, rbbone, BModal, BAlert, validate, R, models, 
+  function(Backbone, rbbone, BModal, BAlert, validate, R, models, highcharts,
     homeTemplate, homeUsersTemplate, homeRolesTemplate, rolesTemplate, explainQueryTemplate, usersRolesTemplate, cubesTemplate, performTemplate) {
 
 
     var BaseView = R.View.extend({
       init: function(options) {
         this._super(options);
+        this.subviews = new Array();
       },
+      tagName: 'div',
       showLoading: function() {
         $('#loading').show();
       },
@@ -25,6 +27,22 @@ define(
       showMessage: function(msg) {
         $(this.el).prepend('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">&times;</button>'+msg+'</div>')
         $(".alert", this.el).alert();
+      }
+      ,
+      close: function () {
+        if(this.subviews && this.subviews.length>0) {
+          for (var i = 0; i<this.subviews.length; i++) {
+            this.subviews[i].close();
+          }
+        }
+
+        if (this.interval) {
+          clearInterval(this.interval);
+        }
+        // this.remove(); // Remove view from DOM
+        this.undelegateEvents();
+        $(this).empty;
+        this.unbind(); // Unbind all local event bindings
       }
     });
 
@@ -42,11 +60,74 @@ define(
         $('.nav li').removeClass('active');
         $('.nav li.menu_home').addClass('active');
 
-
         $(this.el).html(this.template());
 
-        new HomeUsersView({model: new models.Users(), parentEl: this.el});
-        new HomeRolesView({model: new models.Roles(), parentEl: this.el});
+        this.subviews.push(new HomeUsersView({model: new models.Users(), parentEl: this.el}));
+        this.subviews.push(new HomeRolesView({model: new models.Roles(), parentEl: this.el}));
+
+
+        Highcharts.setOptions({
+            global: {
+                useUTC: false
+            }
+        });
+    
+        var chart = 
+          $('#grafic_status').highcharts({
+              chart: {
+                  type: 'spline',
+                  animation: Highcharts.svg, // don't animate in old IE
+                  marginRight: 10
+              },
+              series: [{
+                  name: ' ',
+                  data: (function() {
+                      // generate an array of random data
+                      var data = [],
+                          time = (new Date()).getTime(),
+                          i;
+
+                      // data.push({x:time, y:0});
+
+                      for (i = -10; i <= 0; i++) {
+                          data.push({
+                              x: time,
+                              y: 0
+                          });
+                      }
+                      return data;
+                  })()
+              }],
+              title: {
+                  text: 'Mysql'
+              },
+              xAxis: {
+                  type: 'datetime',
+                  tickPixelInterval: 150
+              },
+              yAxis: {
+                  title: {
+                      text: 'Queries per second avg'
+                  },
+                  plotLines: [{
+                      value: 0,
+                      width: 1,
+                      color: '#808080'
+                  }]
+              },
+              tooltip: {
+                  formatter: function() {
+                          return '<b>'+Highcharts.numberFormat(this.y, 2)+'</b><br/>'+
+                          Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x);
+                  }
+              },
+              legend: {
+                  enabled: false
+              }
+          }).highcharts();
+
+
+        this.subviews.push(new StatusView({model: new models.Status(), chart: chart}));
 
         this.hideLoading();
 
@@ -116,7 +197,7 @@ define(
             user: $('input[name="user"]').val(),
             userName: $('input[name="username"]').val(),
             password: $('input[name="password"]').val(),
-            roles: $('select[name="roles"]').val() || []
+            roles: $('select[name="roles"]').val() || []
         });
 
         $('#newUser').modal('hide');
@@ -136,8 +217,9 @@ define(
         this.roles.fetch({success: function() {
           $(that.el).html(that.template({data: that.model.toJSON(), roles: that.roles.models}));
 
-          new RolesView({model: that.roles, parentEl: that.el});
-          $("#form_user", that.el).validate();
+          that.subviews.push(new RolesView({model: that.roles, parentEl: that.el}));
+
+          $("#content #form_user").validate();
 
           if(options.successMsg) {
             that.showMessage(options.successMsg);
@@ -181,6 +263,8 @@ define(
           that.model.fetch();
         }});
       },
+
+      el: $("#content"),
 
       events: {
         "click .dup_row" : "dup_row",
@@ -246,7 +330,6 @@ define(
         return false;
       },
 
-      el: $("#content"),
       template: _.template(cubesTemplate),
       render: function(options) {
 
@@ -283,8 +366,9 @@ define(
       },
 
       show_explain: function(ev) {
-        var explainView = new QueryExplainView({model: new models.ExplainSqlCollection(),
-                                                query: $(ev.target).html()});
+
+        this.subviews.push( new QueryExplainView({model: new models.ExplainSqlCollection(),
+                                                  query: $(ev.target).html()}));
 
         return false;
       },
@@ -321,6 +405,30 @@ define(
         this.hideLoading();
 
         return this;
+      }
+    });
+
+
+    var StatusView = BaseView.extend({
+      init: function(options) {
+        this._super(options);
+        this.chart = options.chart;
+
+        this.model.on("sync", this.render, this);
+        this.model.fetch();
+
+        var that = this;
+        this.interval = setInterval(function(){
+            console.log('fetch');
+            that.model.fetch();
+          }, 2000);
+      },
+      render: function() {
+
+        var x = (new Date()).getTime(), // current time
+            y = this.model.attributes['queriesPerSecondAvg'];
+
+        this.chart.series[0].addPoint([x,y], true, true);
       }
     });
 

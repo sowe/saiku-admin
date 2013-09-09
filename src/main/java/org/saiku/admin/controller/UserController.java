@@ -55,8 +55,7 @@ public class UserController {
 
     	List<User> users = userRepository.findAll();
 
-    	// TODO, change path file  logger.info(confRepository.findFirst().toString());
-    	PrintWriter writer = new PrintWriter("/users.properties", "UTF-8");
+    	PrintWriter writer = new PrintWriter(confRepository.findFirst().getSaikuUsers()+"users.properties", "UTF-8");
 		writer.println("#Username,password,role");
     	for (Iterator<User> iterator = users.iterator(); iterator.hasNext();) {
 			User user2 = iterator.next();
@@ -71,5 +70,5 @@ public class UserController {
 
         return user;
     }
-    
+
 }

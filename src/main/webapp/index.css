@@ -143,3 +143,8 @@ fieldset {
   height:300px; 
 }
 
+#grafic_status {
+  margin-top: 50px;
+  border: 1px solid #ccc !important;
+}
+

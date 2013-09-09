@@ -29,7 +29,7 @@ public class ParserMysqlAdmin {
 //				"-u "+mysqlData.getUser()+" --password "+mysqlData.getPassword()+" status");
 
 		String status = JavaRunCommand.execute("mysqladmin -h "+mysqlData.getHost()+" --port "+mysqlData.getPort()+" " +
-		"-u "+mysqlData.getUser()+" status");
+		"-u "+mysqlData.getUser()+"-p"+mysqlData.getPassword()+" status");
 
 
 		 String system[] = status.split(" ");

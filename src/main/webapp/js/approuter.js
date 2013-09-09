@@ -2,6 +2,8 @@ define(
   ["jquery", "backbone", "R", "underscore", "views", "models"],
   function($, Backbone, R, _, views, models) {
 
+    var currentView;
+
     var AppRouter = Backbone.Router.extend({
       initialize: function(options) {
       },
@@ -30,19 +32,28 @@ define(
       },
 
       home: function() {
-        var homeView = new views.Home().render();
+        if (currentView) {
+          currentView.close();
+        }
+        currentView = new views.Home().render();
       },
       users: function() {
-        var usersRolesView = new views.UsersRoles({model: new models.Users()});
-        // usersRolesView.render();
+        if (currentView) {
+          currentView.close();
+        }
+        currentView = new views.UsersRoles({model: new models.Users()});
       },
       cubes: function() {
-        var cubesView = new views.Cubes({model: new models.OlapConf()});
-        // cubesView.render();
+        if (currentView) {
+          currentView.close();
+        }
+        currentView = new views.Cubes({model: new models.OlapConf()});
       },
       perform: function() {
-        var performView = new views.Perform({model: new models.QueriesMysql()});
-        performView.render();
+        if (currentView) {
+          currentView.close();
+        }
+        currentView = new views.Perform({model: new models.QueriesMysql()}).render();
       }
     });
 

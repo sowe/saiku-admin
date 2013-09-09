@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.saiku.admin.model.QueryBBDD;
 import org.saiku.admin.model.mysql.ExplainData;
+import org.saiku.admin.repository.ConfRepository;
 import org.saiku.admin.repository.MysqlRepository;
 import org.saiku.admin.utils.ParserMysqlLog;
 import org.slf4j.Logger;
@@ -23,8 +24,11 @@ public class PerformController {
 
     @Inject
     private MysqlRepository mysqlRepository;
+    @Inject
+    private ConfRepository confRepository;
 
     static final Logger logger = LoggerFactory.getLogger(PerformController.class);
+
 
     @RequestMapping(value="/api/perform", method = RequestMethod.GET, produces = "application/json") 
     @ResponseBody
@@ -32,7 +36,7 @@ public class PerformController {
 
     	ParserMysqlLog parser = new ParserMysqlLog();
 
-    	return parser.findQueries();
+    	return parser.findQueries(confRepository.findFirst().getSaikuLogSql());
     }
 
 

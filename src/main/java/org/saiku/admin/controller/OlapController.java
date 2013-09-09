@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.saiku.admin.model.Olap;
 import org.saiku.admin.model.OlapConf;
 import org.saiku.admin.model.olap.RoleMapping;
+import org.saiku.admin.repository.ConfRepository;
 import org.saiku.admin.repository.OlapConfRepository;
 import org.saiku.admin.repository.OlapRepository;
 import org.slf4j.Logger;
@@ -33,6 +34,9 @@ public class OlapController {
 
     @Inject
     private OlapRepository olapRepository;
+    
+    @Inject
+    private ConfRepository confRepository;
 
     static final Logger logger = LoggerFactory.getLogger(OlapController.class);
 
@@ -59,8 +63,7 @@ public class OlapController {
 
     private void createFileOlap(Olap olap) throws FileNotFoundException, UnsupportedEncodingException {
 
-    	// TODO, change path file  logger.info(confRepository.findFirst().toString());
-    	PrintWriter writer = new PrintWriter("/"+olap.getName(), "UTF-8");
+    	PrintWriter writer = new PrintWriter(confRepository.findFirst().getSaikuCube()+olap.getName(), "UTF-8");
 
     	writer.println("type="+olap.getConnection().getType());
 		writer.println("name="+olap.getName());

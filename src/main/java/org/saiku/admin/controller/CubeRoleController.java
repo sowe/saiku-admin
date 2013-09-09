@@ -18,7 +18,7 @@ public class CubeRoleController {
     @Inject
     private CubeRepository cubeRepository;
   
-    @RequestMapping(value = "/cuberole", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/api/cuberole", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public List<String> findRole(@RequestParam(value="schema") String query) {
        return cubeRepository.getRoleCube(query);

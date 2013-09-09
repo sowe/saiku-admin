@@ -19,7 +19,7 @@
           <legend>Connection</legend>
           <label>Jdbc Driver</label>
           <select name="connection_jdbc_driver">
-            <option value="com.mysql.jdbc.Driver">com.mysql.jdbc.Driver</option>
+            l<option value="com.mysql.jdbc.Driver">com.mysql.jdbc.Driver</option>
           </select>
           <label>JDBC</label>
           <input type="text" placeholder="Nombre" name="connection_jdbc" data-rule-required="true" class="input-xxlarge"/>
@@ -47,8 +47,10 @@
           <table class="content_olap_roles">
             <tr><th><label>Role spring</label></th><th></th><th><label>Roles saiku</label></th></tr>
             <tr class="dup">
-              <td><input type="text" name="role_spring" style="width:220px;"/></td>
-              <td style="width:50px;text-align:center;">-></td>
+              <td>
+             <input type="text" name="role_spring" style="width:220px;">
+               </td>
+              <td style="width:50px;text-align:center;"><i class="icon-long-arrow-right  icon-2x"></i></td>
               <td>
                 <select name="roles_saiku" multiple>
                   <% _.each(roles, function(role) { %>

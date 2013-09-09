@@ -66,4 +66,9 @@ public class CubeRepository {
 		}
 	 return rolles;
 	 }
+	 
+	 public static void main(String[] args) {
+		CubeRepository cube_ = new CubeRepository();
+		cube_.getRoleCube("/home/sowe/Descargas/eclipse/Role.mondrina.xml");
+	}
 }
