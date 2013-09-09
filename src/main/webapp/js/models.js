@@ -44,14 +44,6 @@ define(
       }
     });
 
-    var CubeRoles = R.Model.extend();
-    var CubeRolesCollection = R.Collection.extend({
-      model: CubeRoles,
-      url: function() {
-        return domain+"/cuberole";
-      }
-    });
-    
     var ExplainSql = R.Model.extend();
 
     var ExplainSqlCollection = R.Collection.extend({
@@ -104,7 +96,6 @@ define(
       User: User,
       Roles: RolesCollection,
       OlapConf: OlapConf,
-      Roles: RolesCollection,
       Olap: Olap,
       QueriesMysql: QueriesMysqlCollection,
       ExplainSql: ExplainSql,

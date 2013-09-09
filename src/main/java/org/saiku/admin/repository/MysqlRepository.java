@@ -44,8 +44,7 @@ public class MysqlRepository {
 	        }
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("", e);
 		}
 
     	return explainList;

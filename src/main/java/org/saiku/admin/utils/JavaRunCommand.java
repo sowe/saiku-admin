@@ -35,8 +35,7 @@ public class JavaRunCommand {
 			try {
 				process.waitFor();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error("", e);
 			}
 
 			InputStream inputstream = process.getInputStream();
@@ -47,8 +46,7 @@ public class JavaRunCommand {
 			logger.info(commandr);
 		}
 		catch (IOException e) {
-			System.out.println("exception happened - here's what I know: ");
-			e.printStackTrace();
+			logger.error("", e);
 		}
 		return commandr;
 	}

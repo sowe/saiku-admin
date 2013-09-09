@@ -1,5 +1,5 @@
 define(
-  ["backbone", "rbbone", "BModal", "BAlert", "validate", "R", "models", "highcharts",
+  ["backbone", "rbbone", "BModal", "BAlert", "validate", "R", "models", "highcharts", 
   "text!templates/home.html",
   "text!templates/partials/_home_users.html",
   "text!templates/partials/_home_roles.html",
@@ -8,7 +8,7 @@ define(
   "text!templates/users_roles.html",
   "text!templates/cubes.html",
   "text!templates/perform.html"],
-  function(Backbone, rbbone, BModal, BAlert, validate, R, models, highcharts,
+  function(Backbone, rbbone, BModal, BAlert, validate, R, models, highcharts, 
     homeTemplate, homeUsersTemplate, homeRolesTemplate, rolesTemplate, explainQueryTemplate, usersRolesTemplate, cubesTemplate, performTemplate) {
 
 
@@ -129,7 +129,7 @@ define(
 
         this.subviews.push(new StatusView({model: new models.Status(), chart: chart}));
 
-        this.hideLoading();
+        // this.hideLoading();
 
         return this;
       }
@@ -159,6 +159,7 @@ define(
       template: _.template(homeRolesTemplate),
       render: function() {
         $(this.el).html(this.template({data: this.model.toJSON()}));
+        this.hideLoading();
         return this;
       }
     });
@@ -197,7 +198,7 @@ define(
             user: $('input[name="user"]').val(),
             userName: $('input[name="username"]').val(),
             password: $('input[name="password"]').val(),
-            roles: $('select[name="roles"]').val() || []
+            roles: $('select[name="roles"]').val() || []
         });
 
         $('#newUser').modal('hide');

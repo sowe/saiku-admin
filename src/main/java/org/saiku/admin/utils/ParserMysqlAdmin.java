@@ -19,31 +19,26 @@ public class ParserMysqlAdmin {
 
 	public Status status() {
 
-		logger.info(mysqlData.toString());
-		logger.info(mysqlData.getHost());
+		try {
+			String status = JavaRunCommand.execute("mysqladmin -h "+mysqlData.getHost()+" --port "+mysqlData.getPort()+" " +
+					"-u "+mysqlData.getUser()+" status");
 
+			String system[] = status.split(" ");
+			return new Status(
+					 "MySql",
+					 mysqlData.getHost(),
+					 new Integer(system[1]), 
+					 new Integer(system[4]), 
+					 new Integer(system[7]), 
+					 new Integer(system[11]), 
+					 new Integer(system[14]), 
+					 new Integer(system[18]), 
+					 new Integer(system[22]), 
+					 new Double(system[28]));
 
-// TODO, mysqladmin without prompt password
-
-//		String status = JavaRunCommand.execute("mysqladmin -h "+mysqlData.getHost()+" --port "+mysqlData.getPort()+" " +
-//				"-u "+mysqlData.getUser()+" --password "+mysqlData.getPassword()+" status");
-
-		String status = JavaRunCommand.execute("mysqladmin -h "+mysqlData.getHost()+" --port "+mysqlData.getPort()+" " +
-		"-u "+mysqlData.getUser()+"-p"+mysqlData.getPassword()+" status");
-
-
-		 String system[] = status.split(" ");
-
-		 return new Status(
-				 "MySql",
-				 mysqlData.getHost(),
-				 new Integer(system[1]), 
-				 new Integer(system[4]), 
-				 new Integer(system[7]), 
-				 new Integer(system[11]), 
-				 new Integer(system[14]), 
-				 new Integer(system[18]), 
-				 new Integer(system[22]), 
-				 new Double(system[28]));
+		} catch (Exception e) {
+			logger.error("", e);
+			return null;
+		}
 	}
 }
