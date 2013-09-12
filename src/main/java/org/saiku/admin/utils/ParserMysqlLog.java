@@ -12,17 +12,17 @@ import java.util.regex.Pattern;
 import org.saiku.admin.model.QueryBBDD;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ParserMysqlLog {
 
 	static final Logger logger = LoggerFactory.getLogger(ParserMysqlLog.class);
 
-	public List<QueryBBDD> findQueries() {
 
+	public List<QueryBBDD> findQueries(String pathLog) {
 
-		// TODO, Change file path
-
-		String contentLog = this.readFile("/Users/javi/Desktop/saiku_doc/mondrian_sql.log");
+		String contentLog = this.readFile(pathLog);
 
 		List<QueryBBDD> retval = this.parseLog(contentLog);
 
@@ -57,7 +57,7 @@ public class ParserMysqlLog {
 	       content = new String(chars);
 	       reader.close();
 	   } catch (IOException e) {
-	       e.printStackTrace();
+		   logger.error("", e);
 	   }
 	   return content;
 	}

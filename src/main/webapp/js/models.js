@@ -84,6 +84,13 @@ define(
     });
 
 
+    var Status = R.Model.extend({
+      url: function() {
+        return domain+'/status';
+      }
+    });
+
+
     return {
       Users: UsersCollection,
       User: User,
@@ -92,6 +99,7 @@ define(
       Olap: Olap,
       QueriesMysql: QueriesMysqlCollection,
       ExplainSql: ExplainSql,
-      ExplainSqlCollection: ExplainSqlCollection
+      ExplainSqlCollection: ExplainSqlCollection,
+      Status: Status
     };
 });

@@ -1,8 +1,16 @@
-<fieldset class="span3">
-  <legend>Users</legend>
-
-  <% _.each(data, function(user) { %>
-    <%=user.name%><br/>
-  <% }); %>
-
-</fieldset>
+<table class="table table-bordered table-header">
+  <thead>
+  <tr>
+    <th>Users</th>
+  </tr>
+  </thead>
+</table>
+<div class="table-scrollable">
+  <table class="table table-hover table-striped table-bordered table-condensed">
+    <tbody>
+      <% _.each(data, function(user) { %>
+        <tr><td><%=user.name%>&nbsp;</td></tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>

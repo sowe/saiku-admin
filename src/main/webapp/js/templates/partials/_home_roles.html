@@ -1,8 +1,18 @@
-<fieldset class="span3">
-  <legend>Roles</legend>
+<table class="table table-bordered table-header">
+  <thead>
+  <tr>
+    <th>Roles</th>
+  </tr>
+  </thead>
+</table>
+<div class="table-scrollable">
+  <table class="table table-hover table-striped table-bordered table-condensed">
+    <tbody>
 
-  <% _.each(data, function(role) { %>
-    <%=role.name%><br/>
-  <% }); %>
+      <% _.each(data, function(role) { %>
+        <tr><td><%=role.name%>&nbsp;</td></tr>
+      <% }); %>
 
-</fieldset>
+    </tbody>
+  </table>
+</div>

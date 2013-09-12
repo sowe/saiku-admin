@@ -3,7 +3,7 @@
 
     <form action="/saiku_admin/api/olap" method="post" id="form_cube">
       <div class="row">
-        <fieldset class="span7 controls">
+        <fieldset class="span8">
           <legend>General</legend>
           <label>Type</label>
           <select name="connection_type">
@@ -15,23 +15,23 @@
           <input type="text" placeholder="Nombre" name="name" data-rule-required="true" class="input-xlarge"/>
         </fieldset>
 
-        <fieldset class="span7">
+        <fieldset class="span8">
           <legend>Connection</legend>
           <label>Jdbc Driver</label>
           <select name="connection_jdbc_driver">
             <option value="com.mysql.jdbc.Driver">com.mysql.jdbc.Driver</option>
           </select>
           <label>JDBC</label>
-          <input type="text" placeholder="Nombre" name="connection_jdbc" data-rule-required="true" class="input-xxlarge"/>
+          <input type="text" placeholder="Nombre" name="connection_jdbc" data-rule-required="true" class="input-xxxlarge"/>
           <label>Path</label>
-          <input type="text" placeholder="Nombre" name="connection_catalog" data-rule-required="true" class="input-xxlarge"/>
+          <input type="text" placeholder="Nombre" name="connection_catalog" data-rule-required="true" class="input-xxxlarge"/>
           <label>User Database</label>
           <input type="text" placeholder="Nombre" name="connection_username" data-rule-required="true"/>
           <label>Password</label>
           <input type="password" placeholder="Nombre" name="connection_password" data-rule-required="true"/>
         </fieldset>
 
-        <fieldset class="span7 controls">
+        <fieldset class="span8">
           <legend>Security</legend>
 
           <label>Type Security</label>
@@ -47,7 +47,7 @@
           <table class="content_olap_roles">
             <tr><th><label>Role spring</label></th><th></th><th><label>Roles saiku</label></th></tr>
             <tr class="dup">
-              <td><input type="text" name="role_spring" style="width:220px;"/></td>
+              <td><input type="text" name="role_spring" style="width:260px;"/></td>
               <td style="width:50px;text-align:center;">-></td>
               <td>
                 <select name="roles_saiku" multiple>
@@ -58,7 +58,7 @@
               </td>
             </tr>
             <tr>
-              <td colspan="3" class="content_button">
+              <td colspan="3" class="text-right">
                 <input type="button" class="btn dup_row" value="+" />
               </td>
             </tr>
@@ -66,8 +66,8 @@
         </fieldset>
       </div>
       <div class="row">
-        <div class="span12">
-          <button type="submit" class="btn">Submit</button>
+        <div class="span8 content_buttons_footer">
+          <button type="submit" class="btn btn-success btn-large">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
         </div>
       </div>
     </form>

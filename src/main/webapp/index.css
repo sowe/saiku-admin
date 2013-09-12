@@ -1,22 +1,43 @@
+/** General
+---------------------------------------------------- */
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.4em;
   background: #f5f5f5;
   color: #333333;
+  background-image: url('img/wood_pattern.jpg');
 }
 
-.navbar-inner {
-  background-color: #f3f3f3;
-  background-image: -moz-linear-gradient(#f9f9f9, #f3f3f3);
-  background-image: -webkit-linear-gradient(#f9f9f9, #f3f3f3);
-  background-image: linear-gradient(#f9f9f9, #f3f3f3);
-  background-repeat: repeat-x;
+h1 {
+  font-size: 1.5em;
+  color: #555;
+}
 
-  -webkit-box-shadow: none !important;
-  -moz-box-shadow: none !important;
-  box-shadow: none !important;
-  border: 1px solid #dedede;
+input[type="text"], input[type="password"] {
+  padding: 7px;  
+  font-size: 15px;
+}
+
+fieldset {
+  margin-top: 15px;
+  padding: 0px;
+}
+
+legend {
+  color: #555;
+  line-height: 30px;
+  font-size: 20px;
+}
+
+label.error {
+  font-size: 12px;
+  color: red;
+  margin: 0px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
 }
 
 .container {
@@ -27,21 +48,98 @@ body {
   margin: auto;
   float: none;
   background: #fff;
-  padding: 10px;
+  padding: 20px;
   margin: 40px auto;
 
-  box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.05);
-  -webkit-box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.05);
+  margin-top: 50px !important;
+
+  box-shadow: 5px 5px 8px 5px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 5px 5px 8px 5px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 5px 5px 8px 5px rgba(0, 0, 0, 0.15);
+}
+
+#loading{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 40px;
+  bottom: 0px;
+  display: none;
+  z-index: 9999;
+  text-align: center;
+  padding-top: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-image: url('img/loader_white_big.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.input-xxxlarge {
+  width: 600px;
+}
+
+
+/** Custom Bootstrap
+---------------------------------------------------- */
+
+.table-bordered {
+  border-collapse: collapse;
+}
+
+.table-bordered th {
+  border-left: 0px;
+}
+
+.table-bordered thead:first-child tr:first-child > th:first-child {
+  border-left: 1px solid #ddd;
+}
+
+.table-header {
+  margin-bottom: 0px;
+}
+.table-scrollable {
+  height: 250px;
+  overflow: auto;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+.table-scrollable table {
+  margin-bottom: 0px;
+  border: 0px;
+  border-bottom: 1px solid #ddd;
+}
+
+.content_buttons_footer {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.modal-header h3 {
+  color: #555;
+  font-size: 20px;
+}
+
+
+
+/** Header 
+---------------------------------------------------- */
+
+.navbar-inner {
+  background: rgba(255, 255, 255, 1);
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 0px !important;
 }
 
 .navbar .nav {
   width: 500px;
+
 }
 
 .brand {
-  /*margin-right: 30px;*/
-  margin-left: 0px !important;
+  margin: 0px !important;
+  padding: 0px !important;
 }
 
 .navbar .nav{
@@ -52,9 +150,33 @@ body {
   vertical-align: top;
 }
 
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+  background-color: #fff;
+}
+
+.navbar .nav > li > a:hover {
+  background-color: #fff;
+  -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+  -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+}
+
 .navbar-inner {
   text-align:center;
 }
+
+
+/** Home
+---------------------------------------------------- */
+
+#grafic_status {
+  margin-top: 50px;
+  border: 1px solid #ccc !important;
+}
+
+
+/** Users / Roles
+---------------------------------------------------- */
 
 #newUser {
   width: 600px; 
@@ -72,36 +194,9 @@ body {
   height: 150px;
 }
 
-label.error {
-  font-size: 12px;
-  color: red;
-  margin: 0px;
-/*  position: absolute;
-  margin-top: -11px;
-  margin-left: 110px;*/
-  margin-top: -10px;
-  margin-bottom: 10px;
-  margin-left: 5px;
-}
 
-#loading{
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 40px;
-  bottom: 0px;
-  display: none;
-  z-index: 9999;
-
-  background: url('img/loader_white_big.gif');
-  /*background-repeat: no-repeat;*/
-  /*background-position: center;*/
-  text-align: center;
-  padding-top: 10px;
-  opacity: 0.8;
-  background: #fff;
-}
-
+/** Olap
+---------------------------------------------------- */
 
 .content_olap_roles {
   /*width: 300px;*/
@@ -119,27 +214,37 @@ label.error {
 }
 
 .content_olap_roles select {
-  width: 250px;
+  width: 270px;
+  margin: 0px;
 }
 
-input[type="text"], input[type="password"] {
-  padding: 7px;  
-  font-size: 15px;
-}
 
-fieldset {
-  margin-top: 15px;
-  padding: 0px 0px 0px 15px;
-}
-
-.content_button {
-  text-align: right;
-}
-
+/** Perform
+---------------------------------------------------- */
 
 .table_queries tbody { 
   display:block; 
   overflow:auto; 
   height:300px; 
 }
+
+.table_queries td {
+  padding: 0px;
+}
+
+.table_queries .prettyprint {
+  background-color: inherit;
+  border: 0px;
+  font-size: 12px;
+  margin: 0px;
+}
+
+.table_queries .prettyprint a {
+  display: block;
+  padding: 4px 0px;
+}
+.table_queries .prettyprint a {
+  text-decoration: none;
+}
+
 

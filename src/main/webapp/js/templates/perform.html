@@ -3,9 +3,13 @@
 
   <table class="table table-hover table_queries">
     <% _.each(data, function(query) { %>
-        <tr><td><a href="#perform/select * from fichas" class="show_explain"><%=query.query%></a></td></tr>
+        <tr><td><pre class="prettyprint lang-sql"><a href="#perform/select * from fichas" class="show_explain"><%=query.query%></a></pre></td></tr>
     <% }); %>
   </table>
   <div id="explain_query">
   </div>
 </div>
+
+<script type="text/javascript">
+  prettyPrint();
+</script>

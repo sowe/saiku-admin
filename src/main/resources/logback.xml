@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true">
+	  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/Users/Javi/Desktop/SaikuAdmin.log</file>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	      <!-- daily rollover -->
+	      <fileNamePattern>/Users/Javi/Desktop/SaikuAdmin-INFO.%d{yyyy-MM-dd}.log</fileNamePattern>
+	      <!-- keep 30 days' worth of history -->
+	      <maxHistory>30</maxHistory>
+	    </rollingPolicy>
+
+		<encoder>
+      		<pattern>[%-5level] %d{HH:mm:ss.SSS} - %logger{36}%n%msg%n</pattern>
+		</encoder>
+
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <logger name="org.saiku.admin">
+        <level value="TRACE"/>
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="INFO"/>
+    </logger>
+   
+    <logger name="org.springframework.aop">
+        <level value="INFO"/>
+    </logger>
+
+    <logger name="java.io">
+        <level value="INFO"/>
+    </logger>
+
+    <logger name="org.apache">
+    	<level value="INFO"/>
+    </logger>
+
+<!--
+    <logger name="org.apache" level="WARN" />
+    <logger name="org.hibernate" level="WARN" />
+    <logger name="org.hibernate.cfg.AnnotationBinder" level="WARN" />
+    <logger name="org.hibernate.cfg.annotations" level="WARN" />
+    <logger name="org.quartz" level="WARN" />
+    <logger name="org.springframework" level="WARN" />
+-->
+
+
+<!--
+    <logger name="test.myapp.repos">
+        <level value="INFO" />
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="INFO" />
+    </logger>
+-->
+	<root level="DEBUG">
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>

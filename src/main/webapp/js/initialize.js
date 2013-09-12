@@ -10,7 +10,8 @@ require.config({
     BTransitions: "lib/bootstrap-transition",
     BModal: "lib/bootstrap-modal",
     BAlert: "lib/bootstrap-alert",
-    validate: "lib/jquery.validate"
+    validate: "lib/jquery.validate",
+    highcharts: "lib/highcharts/highcharts"
   },
   shim: {
     backbone: {
@@ -33,6 +34,9 @@ require.config({
     rbbone: {
       deps: ["R", "backbone"],
       exports: "R"
+    },
+    highcharts: {
+      deps: ["jquery"]
     },
     jquery: { exports: "$" }
   }

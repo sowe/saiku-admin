@@ -2,6 +2,8 @@ package org.saiku.admin.model.mysql;
 
 public class Status {
 
+	private String database;
+	private String host;
 	private Integer uptime;
 	private Integer threads;
 	private Integer questions;
@@ -11,7 +13,36 @@ public class Status {
 	private Integer openTables;
 	private Double queriesPerSecondAvg;
 
+	
+	public Status(String database, String host, Integer uptime, Integer threads, Integer questions,
+			Integer slowQueries, Integer opens, Integer flushTables,
+			Integer openTables, Double queriesPerSecondAvg) {
+		super();
+		this.database = database;
+		this.host = host;
+		this.uptime = uptime;
+		this.threads = threads;
+		this.questions = questions;
+		this.slowQueries = slowQueries;
+		this.opens = opens;
+		this.flushTables = flushTables;
+		this.openTables = openTables;
+		this.queriesPerSecondAvg = queriesPerSecondAvg;
+	}
 
+
+	public String getDatabase() {
+		return database;
+	}
+	public void setDatabase(String database) {
+		this.database = database;
+	}
+	public String getHost() {
+		return host;
+	}
+	public void setHost(String host) {
+		this.host = host;
+	}
 	public Integer getUptime() {
 		return uptime;
 	}
